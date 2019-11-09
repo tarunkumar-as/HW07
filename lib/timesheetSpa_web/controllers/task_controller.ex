@@ -25,10 +25,9 @@ defmodule TimesheetSpaWeb.TaskController do
     render(conn, "show.json", task: task)
   end
 
-  def update(conn, %{"description" => description, "status" => status, "job_id" => job_id, "worker_id" => worker_id, "hours" => hours, "id" => id}) do
+  def update(conn, %{"id" => id, "description" => description, "status" => status, "job_id" => job_id, "worker_id" => worker_id, "hours" => hours}) do
     task = Tasks.get_task!(id)
-    task_params = %{"description" => description, "status" => status, "job_id" => job_id, "worker_id" => worker_id, "hours" => hours, "id" => id}
-    with {:ok, %Task{} = task} <- Tasks.update_task(task, task_params) do
+    with {:ok, %Task{} = task} <- Tasks.update_task(task, %{"description" => description, "status" => status, "job_id" => job_id, "worker_id" => worker_id, "hours" => hours, "id" => id}) do
       render(conn, "show.json", task: task)
     end
   end

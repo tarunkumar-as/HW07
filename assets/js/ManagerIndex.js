@@ -19,8 +19,17 @@ class ManagerIndex extends React.Component {
 	}
 	
 	handleApproval(jobId) {
-	    
-		update_task();
+	    let task = null;
+    	for (let [key, value] of this.data) {
+      	if (value.id == jobId) {
+        	task = value;
+        	break;
+      	}
+    	}
+	
+    	task = Object.assign({}, task, {status: true});
+    	this.data.set(task.id, task);
+    	update_task(task, this.data);
 	}
 	
 	render() {

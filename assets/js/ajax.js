@@ -124,15 +124,15 @@ export function create_task() {
   });
 }
 
-export function update_task(data) {
+export function update_task(data, end) {
   console.log(data);
   post('/updateTask', data)
   .then((resp) => {
     console.log(resp);
     localStorage.setItem('updateTask', JSON.stringify(resp));
       store.dispatch({
-        type: 'UPDATE_TASK',
-        data: resp.data,
+        type: 'TASK_LIST',
+        data: end,
       });
   });
 }
